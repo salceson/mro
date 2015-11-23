@@ -12,22 +12,21 @@ __author__ = 'Michał Ciołczyk'
 
 def read_image(name):
     return imread(name, True)
-    # return imread(name)
 
 
 def greyscale_to_rgb(im):
     return np.array([im, im, im])
 
 
-def load_dataset(dir):
+def load_dataset(dir_name, fifty=True):
     X = []
     i = 0
-    for f in os.listdir(dir):
-        if isfile(join(dir, f)):
-            im = read_image(join(dir, f))
+    for f in os.listdir(dir_name):
+        if isfile(join(dir_name, f)):
+            im = read_image(join(dir_name, f))
             X.append(im.ravel())
             i += 1
-            if i >= 50:
+            if i >= 50 and fifty:
                 break
     return np.array(X)
 
